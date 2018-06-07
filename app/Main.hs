@@ -9,6 +9,7 @@ import Lib (getInput)
 import qualified Advent01 as A01 (parseInput, answer1, answer2)
 import qualified Advent02 as A02 (parseInput, answer1, answer2)
 import qualified Advent03 as A03 (parseInput, answer1, answer2)
+import qualified Advent04 as A04 (parseInput, answer1, answer2)
 
 advent01 :: IO ()
 advent01 = do
@@ -28,14 +29,21 @@ advent03 = do
   putStrLn $ "Advent 3-1: " ++ show (A03.answer1 input)  -- 1050
   putStrLn $ "Advent 3-2: " ++ show (A03.answer2 input)  -- 1921
 
+advent04 :: IO ()
+advent04 = do
+  input <- A04.parseInput <$> getInput 4
+  putStrLn $ "Advent 4-1: " ++ show (A04.answer1 input)  -- 173787
+  putStrLn $ "Advent 4-2: " ++ show (A04.answer2 input)  -- 548
 
 parse :: [String] -> IO ()
 parse ["01"] = advent01
 parse ["02"] = advent02
 parse ["03"] = advent03
+parse ["04"] = advent04
 parse _      = advent01
             >> advent02
             >> advent03
+            >> advent04
 
 main :: IO ()
 main = getArgs >>= parse
