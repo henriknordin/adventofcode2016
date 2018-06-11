@@ -11,6 +11,7 @@ import qualified Advent02 as A02 (parseInput, answer1, answer2)
 import qualified Advent03 as A03 (parseInput, answer1, answer2)
 import qualified Advent04 as A04 (parseInput, answer1, answer2)
 import           Advent05 as A05 (advent05)
+import           Advent06 as A06 (advent06)
 
 advent01 :: IO ()
 advent01 = do
@@ -43,11 +44,13 @@ parse ["02"] = advent02
 parse ["03"] = advent03
 parse ["04"] = advent04
 parse ["05"] = advent05
+parse ["06"] = advent06
 parse _      = advent01
             >> advent02
             >> advent03
             >> advent04
             >> advent05
+            >> advent06
 
 main :: IO ()
 main = getArgs >>= parse
