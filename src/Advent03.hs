@@ -1,13 +1,19 @@
 -- Day 3: Squares With Three Sides
 --
 module Advent03
-    ( parseInput
-    , answer1
-    , answer2
+    ( advent03
     ) where
 
 import Data.List (foldl', transpose)
 import Data.List.Split (chunksOf)
+
+import Lib (getInput)
+
+advent03 :: IO ()
+advent03 = do
+  input <- parseInput <$> getInput 3
+  putStrLn $ "Advent 3-1: " ++ show (answer1 input)  -- 1050
+  putStrLn $ "Advent 3-2: " ++ show (answer2 input)  -- 1921
 
 parseInput :: String -> [[Int]]
 parseInput = map (map (\s -> read s :: Int) . words) . lines

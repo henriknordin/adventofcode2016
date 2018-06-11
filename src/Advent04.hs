@@ -1,14 +1,20 @@
 -- Day 4: Security Through Obscurity
 --
 module Advent04
-    ( parseInput
-    , answer1
-    , answer2
+    ( advent04
     ) where
 
 import Data.Char (isAlpha, isDigit)
 import Data.List (group, sort, sortBy)
 import Data.Ord (comparing, Down(Down))
+
+import Lib (getInput)
+
+advent04 :: IO ()
+advent04 = do
+  input <- parseInput <$> getInput 4
+  putStrLn $ "Advent 4-1: " ++ show (answer1 input)  -- 173787
+  putStrLn $ "Advent 4-2: " ++ show (answer2 input)  -- 548
 
 data Room = 
   Room { name :: String

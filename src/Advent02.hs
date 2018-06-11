@@ -1,14 +1,20 @@
 -- Day 2: Bathroom Security
 --
 module Advent02
-    ( parseInput
-    , answer1
-    , answer2
+    ( advent02
     ) where
 
 import Data.Char (intToDigit)
 
+import Lib (getInput)
+
 type Coordinate = (Int, Int)
+
+advent02 :: IO ()
+advent02 = do
+  input <- parseInput <$> getInput 2
+  putStrLn $ "Advent 2-1: " ++ show (answer1 input)  -- 24862
+  putStrLn $ "Advent 2-2: " ++ show (answer2 input)  -- 46C91
 
 parseInput :: String -> [String]
 parseInput = lines

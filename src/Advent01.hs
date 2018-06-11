@@ -1,13 +1,13 @@
 -- Day 1: No Time for a Taxicab
 --
 module Advent01
-    ( parseInput
-    , answer1
-    , answer2
+    ( advent01
     ) where
 
 import Data.List (elemIndex)
 import Data.List.Split (splitOn)
+
+import Lib (getInput)
 
 data Direction = North | East | South | West deriving (Eq, Enum, Show)
 
@@ -17,6 +17,12 @@ data Move =
   Move { turn :: Char
        , step :: Int
        } deriving (Show)
+
+advent01 :: IO ()
+advent01 = do
+  input <- parseInput <$> getInput 1
+  putStrLn $ "Advent 1-1: " ++ show (answer1 input)  -- 300
+  putStrLn $ "Advent 1-2: " ++ show (answer2 input)  -- 159
 
 parseInput :: String -> [Move]
 parseInput = map parseMove . splitOn ", " . head . lines
