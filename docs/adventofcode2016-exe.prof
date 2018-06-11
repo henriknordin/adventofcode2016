@@ -1,0 +1,165 @@
+	Sun Jun 10 14:25 2018 Time and Allocation Profiling Report  (Final)
+
+	   adventofcode2016-exe +RTS -N -p -RTS 05
+
+	total time  =      342.41 secs   (342408 ticks @ 1000 us, 1 processor)
+	total alloc = 680,084,866,728 bytes  (excludes profiling overheads)
+
+COST CENTRE          MODULE               SRC                                         %time %alloc
+
+show.\.cx            Data.Digest.Pure.MD5 Data/Digest/Pure/MD5.hs:291:30-47            38.2   26.8
+*>.w'                Data.Serialize.Put   src/Data/Serialize/Put.hs:163:17-36          18.7   13.7
+show.\               Data.Digest.Pure.MD5 Data/Digest/Pure/MD5.hs:(291,26)-(294,39)    10.3    0.1
+*>                   Data.Serialize.Put   src/Data/Serialize/Put.hs:(161,9)-(164,41)    9.1   23.9
+md5Finalize.padBS    Data.Digest.Pure.MD5 Data/Digest/Pure/MD5.hs:(103,13)-(106,55)     5.0   22.7
+applyMD5Rounds       Data.Digest.Pure.MD5 Data/Digest/Pure/MD5.hs:(147,9)-(215,33)      3.4    1.0
+md5Finalize          Data.Digest.Pure.MD5 Data/Digest/Pure/MD5.hs:(101,1)-(112,60)      3.3    0.4
+md5hash.unhashed     Advent05             src/Advent05.hs:51:19-57                      1.9    1.9
+show                 Data.Digest.Pure.MD5 Data/Digest/Pure/MD5.hs:(289,3)-(294,69)      1.6    1.3
+*>.(...)             Data.Serialize.Put   src/Data/Serialize/Put.hs:163:17-36           1.4    0.0
+md5PartialBytes.toBs Data.Digest.Pure.MD5 Data/Digest/Pure/MD5.hs:(275,5)-(277,18)      1.0    1.2
+
+
+                                                                                                                                  individual      inherited
+COST CENTRE                                 MODULE                 SRC                                        no.      entries  %time %alloc   %time %alloc
+
+MAIN                                        MAIN                   <built-in>                                  772          0    0.0    0.0   100.0  100.0
+ CAF                                        GHC.Conc.Signal        <entire-module>                             872          0    0.0    0.0     0.0    0.0
+ CAF                                        GHC.IO.Encoding        <entire-module>                             854          0    0.0    0.0     0.0    0.0
+ CAF                                        GHC.IO.Encoding.Iconv  <entire-module>                             852          0    0.0    0.0     0.0    0.0
+ CAF                                        GHC.IO.FD              <entire-module>                             845          0    0.0    0.0     0.0    0.0
+ CAF                                        GHC.IO.Handle.FD       <entire-module>                             843          0    0.0    0.0     0.0    0.0
+ CAF                                        GHC.IO.Handle.Text     <entire-module>                             841          0    0.0    0.0     0.0    0.0
+ CAF                                        System.Posix.Internals <entire-module>                             810          0    0.0    0.0     0.0    0.0
+ CAF                                        Text.Printf            <entire-module>                             806          0    0.0    0.0     0.0    0.0
+ CAF                                        Text.Read.Lex          <entire-module>                             804          0    0.0    0.0     0.0    0.0
+ CAF                                        GHC.Event.Thread       <entire-module>                             798          0    0.0    0.0     0.0    0.0
+ CAF                                        GHC.Event.Poll         <entire-module>                             788          0    0.0    0.0     0.0    0.0
+ CAF:$fHashMD5ContextMD5Digest1             Data.Digest.Pure.MD5   <no location info>                         1360          0    0.0    0.0     0.0    0.0
+  blockLength                               Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:344:9-33           1583          1    0.0    0.0     0.0    0.0
+ CAF:$fHashMD5ContextMD5Digest_$cfinalize   Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:347:9-16           1377          0    0.0    0.0     0.0    0.0
+  finalize                                  Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:347:9-34           1565          1    0.0    0.0     0.0    0.0
+ CAF:$fHashMD5ContextMD5Digest_$cinitialCtx Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:345:9-18           1374          0    0.0    0.0     0.0    0.0
+  initialCtx                                Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:345:9-40           1568          1    0.0    0.0     0.0    0.0
+ CAF:.::.1                                  Crypto.Util            <no location info>                         1231          0    0.0    0.0     0.0    0.0
+  .::.                                      Crypto.Util            Crypto/Util.hs:50:1-12                     1580          1    0.0    0.0     0.0    0.0
+ CAF:advent1                                Advent05               <no location info>                         1413          0    0.0    0.0     0.0    0.0
+  advent05                                  Advent05               src/Advent05.hs:(20,1)-(24,55)             1547          1    0.0    0.0     0.0    0.0
+ CAF:advent7                                Advent05               <no location info>                         1412          0    0.0    0.0     0.0    0.0
+  advent05                                  Advent05               src/Advent05.hs:(20,1)-(24,55)             1549          0    0.0    0.0     0.0    0.0
+   getInput                                 Lib                    src/Lib.hs:9:1-53                          1550          1    0.0    0.0     0.0    0.0
+ CAF:answer1                                Advent05               src/Advent05.hs:30:1-7                     1409          0    0.0    0.0     0.0    0.0
+  answer1                                   Advent05               src/Advent05.hs:30:1-27                    1552          1    0.0    0.0     0.0    0.0
+ CAF:answer2                                Advent05               src/Advent05.hs:33:1-7                     1410          0    0.0    0.0     0.0    0.0
+  answer2                                   Advent05               src/Advent05.hs:33:1-156                   1636          1    0.0    0.0     0.0    0.0
+ CAF:blockSizeBytes_r2jc                    Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:70:1-14            1364          0    0.0    0.0     0.0    0.0
+  blockSizeBytes                            Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:70:1-37            1616          1    0.0    0.0     0.0    0.0
+ CAF:ds4_rk2X                               Data.Digest.Pure.MD5   <no location info>                         1375          0    0.0    0.0     0.0    0.0
+  md5Finalize                               Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(101,1)-(112,60)   1609          0    0.0    0.0     0.0    0.0
+   md5Finalize.padBS                        Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(103,13)-(106,55)  1610          0    0.0    0.0     0.0    0.0
+    *>                                      Data.Serialize.Put     src/Data/Serialize/Put.hs:(161,9)-(164,41) 1611          0    0.0    0.0     0.0    0.0
+     *>.(...)                               Data.Serialize.Put     src/Data/Serialize/Put.hs:162:17-36        1612          1    0.0    0.0     0.0    0.0
+      unPut                                 Data.Serialize.Put     src/Data/Serialize/Put.hs:139:24-28        1613          1    0.0    0.0     0.0    0.0
+ CAF:genPassword                            Advent05               src/Advent05.hs:36:1-11                    1411          0    0.0    0.0     0.0    0.0
+  genPassword                               Advent05               src/Advent05.hs:(36,1)-(42,40)             1555          1    0.0    0.0     0.0    0.0
+ CAF:getInput2                              Lib                    <no location info>                         1407          0    0.0    0.0     0.0    0.0
+ CAF:h0                                     Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:89:1-2             1372          0    0.0    0.0     0.0    0.0
+  h0                                        Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:89:1-15            1570          1    0.0    0.0     0.0    0.0
+ CAF:h1                                     Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:90:1-2             1371          0    0.0    0.0     0.0    0.0
+  h1                                        Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:90:1-15            1571          1    0.0    0.0     0.0    0.0
+ CAF:h2                                     Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:91:1-2             1370          0    0.0    0.0     0.0    0.0
+  h2                                        Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:91:1-15            1572          1    0.0    0.0     0.0    0.0
+ CAF:h3                                     Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:92:1-2             1369          0    0.0    0.0     0.0    0.0
+  h3                                        Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:92:1-15            1573          1    0.0    0.0     0.0    0.0
+ CAF:lvl1_rk1R                              Data.Digest.Pure.MD5   <no location info>                         1345          0    0.0    0.0     0.0    0.0
+  pure                                      Data.Serialize.Put     src/Data/Serialize/Put.hs:152:9-39         1619          1    0.0    0.0     0.0    0.0
+ CAF:lvl20_rk2Y                             Data.Digest.Pure.MD5   <no location info>                         1376          0    0.0    0.0     0.0    0.0
+  md5Finalize                               Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(101,1)-(112,60)   1605          0    0.0    0.0     0.0    0.0
+   md5Finalize.padBS                        Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(103,13)-(106,55)  1606          0    0.0    0.0     0.0    0.0
+    *>                                      Data.Serialize.Put     src/Data/Serialize/Put.hs:(161,9)-(164,41) 1607          0    0.0    0.0     0.0    0.0
+     *>.w                                   Data.Serialize.Put     src/Data/Serialize/Put.hs:162:17-36        1608          1    0.0    0.0     0.0    0.0
+ CAF:lvl28_rk3a                             Data.Digest.Pure.MD5   <no location info>                         1384          0    0.0    0.0     0.0    0.0
+  show                                      Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(289,3)-(294,69)   1630          0    0.0    0.0     0.0    0.0
+   show.\                                   Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(291,26)-(294,39)  1631          0    0.0    0.0     0.0    0.0
+    show.\.cx                               Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:291:30-47          1632          0    0.0    0.0     0.0    0.0
+ CAF:main1                                  Main                   <no location info>                         1542          0    0.0    0.0     0.0    0.0
+  main                                      Main                   app/Main.hs:53:1-24                        1544          1    0.0    0.0     0.0    0.0
+ CAF:md5                                    Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:97:1-3             1381          0    0.0    0.0     0.0    0.0
+  md5                                       Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:97:1-10            1561          1    0.0    0.0     0.0    0.0
+ CAF:md5BlockSize_r2gm                      Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:67:1-12            1363          0    0.0    0.0     0.0    0.0
+  md5BlockSize                              Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:67:1-18            1617          1    0.0    0.0     0.0    0.0
+ CAF:md5DigestBytes_toBs                    Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:275:5-8            1382          0    0.0    0.0     0.0    0.0
+  md5PartialBytes                           Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(269,1)-(277,18)   1590          0    0.0    0.0     0.0    0.0
+   md5PartialBytes.toBs                     Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(275,5)-(277,18)   1591          1    0.0    0.0     0.0    0.0
+ CAF:md5InitialContext                      Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:86:1-17            1373          0    0.0    0.0     0.0    0.0
+  md5InitialContext                         Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:86:1-49            1569          1    0.0    0.0     0.0    0.0
+ CAF:md5PartialBytes                        Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:269:1-15           1383          0    0.0    0.0     0.0    0.0
+  md5PartialBytes                           Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(269,1)-(277,18)   1588          1    0.0    0.0     0.0    0.0
+ CAF:parse1                                 Main                   <no location info>                         1541          0    0.0    0.0     0.0    0.0
+ CAF:parse3                                 Main                   <no location info>                         1540          0    0.0    0.0     0.0    0.0
+ CAF:parse5                                 Main                   <no location info>                         1539          0    0.0    0.0     0.0    0.0
+ CAF:parse7                                 Main                   <no location info>                         1537          0    0.0    0.0     0.0    0.0
+ CAF:parse9                                 Main                   <no location info>                         1538          0    0.0    0.0     0.0    0.0
+ CAF:parseInput                             Advent05               src/Advent05.hs:27:1-10                    1408          0    0.0    0.0     0.0    0.0
+  parseInput                                Advent05               src/Advent05.hs:27:1-34                    1577          1    0.0    0.0     0.0    0.0
+ main                                       Main                   app/Main.hs:53:1-24                        1545          0    0.0    0.0   100.0  100.0
+  parse                                     Main                   app/Main.hs:(41,1)-(50,23)                 1546          1    0.0    0.0   100.0  100.0
+   advent05                                 Advent05               src/Advent05.hs:(20,1)-(24,55)             1548          0    0.0    0.0   100.0  100.0
+    advent05.generated                      Advent05               src/Advent05.hs:22:7-35                    1554          1    0.0    0.0   100.0  100.0
+     genPassword                            Advent05               src/Advent05.hs:(36,1)-(42,40)             1556          0    0.0    0.0   100.0  100.0
+      genPassword.go                        Advent05               src/Advent05.hs:(39,5)-(42,40)             1557   25067105    0.4    0.2   100.0  100.0
+       genPassword.go.hashed                Advent05               src/Advent05.hs:39:18-37                   1558   25067105    0.1    0.0    99.4   99.5
+        md5hash                             Advent05               src/Advent05.hs:(51,1)-(53,28)             1559   25067105    0.2    0.1    99.4   99.5
+         md5hash.hashed                     Advent05               src/Advent05.hs:52:19-54                   1560   25067105    0.1    0.3    45.7   67.6
+          md5                               Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:97:1-10            1562          0    0.1    0.0    45.5   67.4
+           hash                             Crypto.Classes         Crypto/Classes.hs:(94,3)-(99,45)           1563   25067105    0.6    0.6    45.4   67.4
+            hash.(...)                      Crypto.Classes         Crypto/Classes.hs:98:5-40                  1575   25067105    0.3    0.5     0.3    0.5
+            hash.blks                       Crypto.Classes         Crypto/Classes.hs:98:5-40                  1574   25067105    0.1    0.0     0.1    0.0
+            hash.blockLen                   Crypto.Classes         Crypto/Classes.hs:99:5-45                  1579   25067105    0.3    0.1     0.5    0.1
+             for                            Crypto.Util            Crypto/Util.hs:46:1-20                     1581   25067105    0.1    0.0     0.1    0.0
+              unTagged                      Data.Tagged            src/Data/Tagged.hs:103:31-38               1582   25067105    0.0    0.0     0.0    0.0
+            hash.ctx                        Crypto.Classes         Crypto/Classes.hs:97:5-42                  1567   25067105    0.1    0.2     0.1    0.2
+            hash.end                        Crypto.Classes         Crypto/Classes.hs:98:5-40                  1601   25067105    0.0    0.0     0.0    0.0
+            hash.res                        Crypto.Classes         Crypto/Classes.hs:96:5-26                  1564   25067105    0.1    0.0    43.8   66.1
+             finalize                       Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:347:9-34           1566          0    0.2    0.3    43.8   66.1
+              md5Finalize                   Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(101,1)-(112,60)   1584   25067105    3.3    0.4    43.5   65.8
+               applyMD5Rounds               Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(147,9)-(215,33)   1621   25067105    3.4    1.0     5.3    4.8
+                ff                          Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(226,17)-(228,26)  1622  401073680    0.5    0.9     0.5    0.9
+                gg                          Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(231,17)-(233,26)  1623  401073680    0.5    0.9     0.5    0.9
+                hh                          Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(236,17)-(238,30)  1624  401073680    0.4    0.9     0.4    0.9
+                ii                          Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(241,17)-(243,26)  1625  401073680    0.4    0.9     0.4    0.9
+               md5Finalize.l                Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:109:5-20           1615   25067105    0.1    0.1     0.1    0.1
+               md5Finalize.lenZeroPad       Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(110,5)-(112,60)   1614   25067105    0.1    0.1     0.1    0.1
+               md5Finalize.padBS            Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(103,13)-(106,55)  1593   25067105    5.0   22.7    34.7   60.4
+                *>                          Data.Serialize.Put     src/Data/Serialize/Put.hs:(161,9)-(164,41) 1596 1063929520    9.1   23.9    29.6   37.7
+                 *>.(...)                   Data.Serialize.Put     src/Data/Serialize/Put.hs:163:17-36        1603 1063929520    1.4    0.0     1.4    0.0
+                  unPut                     Data.Serialize.Put     src/Data/Serialize/Put.hs:139:24-28        1604 1063929520    0.0    0.0     0.0    0.0
+                 *>.w'                      Data.Serialize.Put     src/Data/Serialize/Put.hs:163:17-36        1602 1063929520   13.2    9.9    13.2    9.9
+                  *>.w                      Data.Serialize.Put     src/Data/Serialize/Put.hs:162:17-36        1635          0    0.0    0.0     0.0    0.0
+                 *>.(...)                   Data.Serialize.Put     src/Data/Serialize/Put.hs:162:17-36        1598   75201315    0.1    0.0     0.1    0.0
+                  unPut                     Data.Serialize.Put     src/Data/Serialize/Put.hs:139:24-28        1599   75201315    0.0    0.0     0.0    0.0
+                 *>.w                       Data.Serialize.Put     src/Data/Serialize/Put.hs:162:17-36        1600   75201315    0.3    0.1     5.7    3.9
+                  *>.w'                     Data.Serialize.Put     src/Data/Serialize/Put.hs:163:17-36        1618          0    5.5    3.8     5.5    3.8
+                >>                          Data.Serialize.Put     src/Data/Serialize/Put.hs:178:5-15         1595   75201315    0.0    0.0     0.0    0.0
+                sndS                        Data.Serialize.Put     src/Data/Serialize/Put.hs:136:1-20         1597   25067105    0.0    0.0     0.0    0.0
+                unPut                       Data.Serialize.Put     src/Data/Serialize/Put.hs:139:24-28        1594   25067105    0.0    0.0     0.0    0.0
+               md5Finalize.totLen'          Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:102:13-59          1620   25067105    0.1    0.1     0.1    0.1
+         md5hash.unhashed                   Advent05               src/Advent05.hs:51:19-57                   1576   25067105    1.9    1.9     1.9    1.9
+         show                               Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:286:5-31           1585   25067105    0.0    0.0    51.7   29.9
+          show                              Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(289,3)-(294,69)   1586   25067105    1.6    1.3    51.6   29.9
+           show.\                           Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(291,26)-(294,39)  1628  401073680   10.3    0.1    48.5   26.9
+            show.\.cx                       Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:291:30-47          1629  401073680   38.2   26.8    38.2   26.8
+           show.bs                          Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:290:9-35           1587   25067105    0.1    0.0     1.5    1.7
+            md5PartialBytes                 Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(269,1)-(277,18)   1589          0    0.4    0.3     1.4    1.7
+             put                            Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:309:9-95           1626   25067105    0.0    0.0     0.0    0.0
+             md5PartialBytes.toBs           Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:(275,5)-(277,18)   1592          0    1.0    1.2     1.1    1.4
+              put                           Data.Digest.Pure.MD5   Data/Digest/Pure/MD5.hs:309:9-95           1627          0    0.1    0.2     0.1    0.2
+       valid                                Advent05               src/Advent05.hs:(45,1)-(48,28)             1633   25067105    0.1    0.0     0.2    0.2
+        valid.prefix                        Advent05               src/Advent05.hs:45:15-31                   1634   25067105    0.1    0.2     0.1    0.2
+    answer1                                 Advent05               src/Advent05.hs:30:1-27                    1553          0    0.0    0.0     0.0    0.0
+    answer2                                 Advent05               src/Advent05.hs:33:1-156                   1637          0    0.0    0.0     0.0    0.0
+     answer2.\                              Advent05               src/Advent05.hs:33:71-84                   1640         43    0.0    0.0     0.0    0.0
+     answer2.\                              Advent05               src/Advent05.hs:33:127-155                 1639         27    0.0    0.0     0.0    0.0
+     answer2.\                              Advent05               src/Advent05.hs:33:103-111                 1638         27    0.0    0.0     0.0    0.0
+    getInput                                Lib                    src/Lib.hs:9:1-53                          1551          0    0.0    0.0     0.0    0.0
+    parseInput                              Advent05               src/Advent05.hs:27:1-34                    1578          0    0.0    0.0     0.0    0.0

@@ -1,0 +1,10 @@
+[henrik@xps adventofcode2016] % time stack exec adventofcode2016-exe 05                                                                                                                                  [master**]
+Advent 5-1: "f97c354d"
+Advent 5-2: "863dde27"
+stack exec adventofcode2016-exe 05  607.54s user 89.38s system 262% cpu 4:25.61 total
+
+[henrik@xps adventofcode2016] % time stack exec adventofcode2016-exe 05                                                                                                                                  [master**]
+Advent 5-1: "f97c354d"
+Advent 5-2: "863dde27"
+stack exec adventofcode2016-exe 05  454.21s user 69.29s system 260% cpu 3:21.12 total
+

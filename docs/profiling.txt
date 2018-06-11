@@ -1,0 +1,13 @@
+
+To build with profiling enabled:
+
+$ stack build --profile
+
+
+To profile the program:
+
+$ stack exec -- <program> +RTS <profiling option>
+
+where <profiling options could be
+ * -p - for time profiling
+ * -h - for memory profiling
