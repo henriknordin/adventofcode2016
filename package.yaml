@@ -29,6 +29,7 @@ dependencies:
 - array >= 0.5.2 && < 0.6
 - megaparsec
 - pqueue
+- parser-combinators
 
 library:
   source-dirs: src
