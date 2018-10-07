@@ -30,6 +30,7 @@ dependencies:
 - megaparsec
 - pqueue
 - parser-combinators
+- deepseq
 
 library:
   source-dirs: src
