@@ -29,6 +29,7 @@ import           Advent21 (advent21)
 import           Advent22 (advent22)
 import           Advent23 (advent23)
 import           Advent24 (advent24)
+import           Advent25 (advent25)
 
 parse :: [String] -> IO ()
 parse ["01"] = advent01
@@ -55,6 +56,7 @@ parse ["21"] = advent21
 parse ["22"] = advent22
 parse ["23"] = advent23
 parse ["24"] = advent24
+parse ["25"] = advent25
 parse _      = advent01
             >> advent02
             >> advent03
@@ -79,6 +81,7 @@ parse _      = advent01
             >> advent22
             >> advent23
             >> advent24
+            >> advent25
 
 main :: IO ()
 main = getArgs >>= parse
