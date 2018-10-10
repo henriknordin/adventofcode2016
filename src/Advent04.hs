@@ -55,13 +55,3 @@ decryptChar c rot = let start = fromEnum 'a'
                         i = fromEnum c
                 in if c == '-' then ' ' else toEnum (((i - start + rot) `mod` range)+start)
 
-test1 :: String
-test1 = 
-  "aaaaa-bbb-z-y-x-123[abxyz]\n\
-  \a-b-c-d-e-f-g-h-987[abcde]\n\
-  \not-a-real-room-404[oarel]\n\
-  \totally-real-room-200[decoy]"
-
-test2 :: String
-test2 = "qzmt-zixmtkozy-ivhz-343"
-

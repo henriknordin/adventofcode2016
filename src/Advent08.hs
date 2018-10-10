@@ -1,12 +1,12 @@
-{-# LANGUAGE OverloadedStrings #-}
 -- Day 8: Two-Factor Authentication
 --
+{-# LANGUAGE OverloadedStrings #-}
 module Advent08
     ( advent08
     ) where
 
-import           Data.Array (Array, array, bounds, range, (//), (!))
-import           Data.List.Split (chunksOf)
+import           Data.Array (Array, array, bounds, (//), (!))
+--import           Data.List.Split (chunksOf)
 import           Data.Foldable (toList)
 import           Lib (getInput)
 
@@ -99,23 +99,17 @@ rotateRow g r shift = g // [(((c + shift) `mod` (cols + 1), r), g!(c,r))| c <- [
   where
     ((_,_), (cols,_)) = bounds g
 
-pretty :: Grid -> IO ()
-pretty g = putStr . unlines . chunksOf xBound . map (\c -> if c == 0 then '.' else '#') . toList $ g
-  where
-    xBound = fst . snd . bounds $ g
-
+--pretty :: Grid -> IO ()
+--pretty g = putStr . unlines . chunksOf xBound . map (\c -> if c == 0 then '.' else '#') . toList $ g
+--  where
+--    xBound = fst . snd . bounds $ g
+--
 pretty' :: Grid -> String
 pretty' g = unlines $ map (unwords . map (show . (g !))) indices
   where indices = [[(x, y) | x <- [startX..endX]] | y <- [startY..endY]]
         ((startX, startY), (endX, endY)) = bounds g
-
-pretty'' :: Grid -> String
-pretty'' g = unlines $ map (show . (g !)) indices
-  where indices = range $ bounds g
-
-g0 = mkGrid 7 3
-g1 = rect g0 3 2
-g2 = rotateCol g1 1 1
-g2' = rotateRow g1 1 1
-g3 = rotateRow g2 0 4
+--
+--pretty'' :: Grid -> String
+--pretty'' g = unlines $ map (show . (g !)) indices
+--  where indices = range $ bounds g
 

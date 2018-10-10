@@ -3,9 +3,7 @@ module Advent13 where
 
 import           Data.List (foldl')
 import           Data.Maybe (fromJust)
-import qualified Data.PQueue.Min as Q (MinQueue, empty, singleton, deleteFindMin, getMin, insert)
-import qualified Data.PQueue.Prio.Min as PQ (MinPQueue, deleteFindMin, empty, insert, getMin, singleton)
-import           Data.Ord (comparing)
+import qualified Data.PQueue.Prio.Min as PQ (MinPQueue, deleteFindMin, empty, insert, singleton)
 import qualified Data.Set as S (Set, singleton, notMember, insert, size)
 import           Numeric (showIntAtBase)
 import           Data.Char (intToDigit)
@@ -79,7 +77,6 @@ parseInput = read
 answer1 :: Int -> Int -> Int -> Int
 answer1 goalX goalY magic = fromJust $ aStar predicate cost generator
   where
-    magicEquation = equation magic
     predicate (Coordinate x y) = x == goalX && y == goalY
     cost :: Walk -> Int 
     cost (Walk c s) = s + heuristic c

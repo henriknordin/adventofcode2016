@@ -3,10 +3,10 @@ module Data.Hash
   , md5hash'
   ) where
 
-import qualified Data.ByteString as B
-import qualified Data.ByteString.Lazy as BL (ByteString, fromStrict, toStrict)
+--import qualified Data.ByteString as B
+import qualified Data.ByteString.Lazy as BL (fromStrict)
 import qualified Data.ByteString.Char8 as C
-import           Data.Digest.Pure.MD5 (md5, md5DigestBytes)
+import           Data.Digest.Pure.MD5 (md5)
 
 import           Crypto.Hash
 

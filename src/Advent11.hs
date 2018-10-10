@@ -1,7 +1,6 @@
 module Advent11 where
 
-import           Data.Foldable (toList)
-import           Data.List (find, foldl', sort, groupBy, (\\)) 
+import           Data.List (foldl', sort, groupBy, (\\)) 
 import           Data.Maybe (fromJust, mapMaybe)
 import           Data.Ord (comparing)
 import qualified Data.PQueue.Min as Q (MinQueue, empty, singleton, deleteFindMin, insert)
@@ -13,7 +12,6 @@ advent11 :: IO ()
 advent11 = do
   putStrLn $ "Advent 11-1: " ++ show (answer input1) -- 33
   putStrLn $ "Advent 11-2: " ++ show (answer input2) -- 57
-  --putStrLn $ "Advent 11-BENCHMARK: " ++ show (answer benchmark) -- 45
 
 answer :: [Floor] -> Int
 answer xs = numberMoves $ fromJust result

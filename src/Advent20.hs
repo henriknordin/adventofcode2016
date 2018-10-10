@@ -4,7 +4,7 @@ module Advent20 where
 
 import           Data.List (sortBy)
 import           Data.Ord (comparing)
-import           Text.Megaparsec (Parsec, many, parse, parseErrorPretty, (<|>)) 
+import           Text.Megaparsec (Parsec, many, parse, parseErrorPretty) 
 import qualified Text.Megaparsec.Char.Lexer  as L (decimal)
 import           Data.Void
 

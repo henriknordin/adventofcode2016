@@ -58,7 +58,6 @@ process reg opcodes = go reg opcodes 0
       | otherwise                 = 
           let opcode = opcodes !! pointer
               (offset, reg') = processOp reg opcode
-              nextPointer = offset + pointer
           in go reg' opcodes (offset + pointer)
 
 processOp :: S.Seq Int -> Opcode -> (Int, S.Seq Int)

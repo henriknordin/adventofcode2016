@@ -4,7 +4,7 @@ module Advent03
     ( advent03
     ) where
 
-import Data.List (foldl', transpose)
+import Data.List (transpose)
 import Data.List.Split (chunksOf)
 
 import Lib (getInput)

@@ -6,8 +6,7 @@ module Advent05
     ) where
 
 import qualified Data.ByteString as B
-import qualified Data.ByteString.Internal as B (c2w, w2c)
-import qualified Data.ByteString.Lazy as B (fromStrict, toStrict)
+import qualified Data.ByteString.Lazy as B (fromStrict)
 import qualified Data.ByteString.Char8 as C
 import           Data.Char (digitToInt)
 import           Data.Digest.Pure.MD5
@@ -51,10 +50,4 @@ md5hash :: B.ByteString -> Int -> String
 md5hash s i = let unhashed = B.append s $ C.pack $ show i
                   hashed = md5 $ B.fromStrict unhashed
               in show hashed
-
-test :: B.ByteString
-test = "abc"
-
-input :: B.ByteString
-input = "reyedfim"
 

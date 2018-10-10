@@ -4,7 +4,7 @@ module Advent14 (advent14) where
 import           Data.List (find, isInfixOf)
 import           Data.Maybe (isJust)
 
-import           Data.Hash (md5hash, md5hash')
+import           Data.Hash (md5hash)
 import           Lib (getInput)
 
 answer :: [String]-> Int

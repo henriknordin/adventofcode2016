@@ -4,8 +4,6 @@ module Advent02
     ( advent02
     ) where
 
-import Data.Char (intToDigit)
-
 import Lib (getInput)
 
 type Coordinate = (Int, Int)
@@ -71,10 +69,4 @@ keypad2 =
   , " ABC "
   , "  D  "
   ]
-
-test' :: String
-test' = "ULL\n\
-        \RRDDD\n\
-        \LURDL\n\
-        \UUUUD"
 

@@ -41,7 +41,6 @@ parseRule s = (rest, Rule (read len) (read reps))
   where
     (rule, _:rest) = span (/= ')') s
     [len, reps] = splitOn "x" rule
-    sequ = take (read len) rest
 
 data Rule = Rule !Int !Int deriving (Show)
 

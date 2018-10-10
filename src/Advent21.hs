@@ -128,21 +128,6 @@ rotateLetter' c xs = rotateLeft i xs
             6 -> 0
             0 -> 1
 
-test :: Eq a => a -> Seq a -> Seq a
-test c = rotateLetter' c . rotateLetter c
-
--- start
---      shift
---           new index
--- 0 -> 1 -> 1 -> -1 -> 0
--- 1 -> 2 -> 3 -> -2 -> 1
--- 2 -> 3 -> 5 -> -3 -> 2
--- 3 -> 4 -> 7 -> -4 -> 3
--- 4 -> 6 -> 10 % 8 = 2
--- 5 -> 7 -> 12 % 8 = 4
--- 6 -> 8 -> 14 % 8 = 6
--- 7 -> 9 -> 16 % 8 = 0
-
 -- reverse positions X through Y
 parseReverse :: Parser Opcode
 parseReverse = do

@@ -65,16 +65,16 @@ tokenize xs = let (s1, s2) = span (/= '[') xs
                 [] -> [s1]
                 _  -> s1 : take (endIndex + 1) s2 : tokenize (drop (endIndex + 1) s2)
 
-test1 = "abba[mnop]qrst"
-test2 = "abcd[bddb]xyyx"
-test3 = "aaaa[qwer]tyui"
-test4 = "ioxxoj[asdfgh]zxcvbn"
-test5 = "ioxxoj[asddsgh]zxcvbn"
-test6 = "ioxxoj[asddsgh]"
-test = [test1, test2, test3, test4, test5]
-
-ssl1 = "aba[bab]xyz"
-ssl2 = "xyx[xyx]xyx"
-ssl3 = "aaa[kek]eke"
-ssl4 = "zazbz[bzb]cdb"
+--test1 = "abba[mnop]qrst"
+--test2 = "abcd[bddb]xyyx"
+--test3 = "aaaa[qwer]tyui"
+--test4 = "ioxxoj[asdfgh]zxcvbn"
+--test5 = "ioxxoj[asddsgh]zxcvbn"
+--test6 = "ioxxoj[asddsgh]"
+--test = [test1, test2, test3, test4, test5]
+--
+--ssl1 = "aba[bab]xyz"
+--ssl2 = "xyx[xyx]xyx"
+--ssl3 = "aaa[kek]eke"
+--ssl4 = "zazbz[bzb]cdb"
 

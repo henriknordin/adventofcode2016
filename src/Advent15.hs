@@ -3,7 +3,7 @@
 module Advent15 where
 
 import           Data.List (group)
-import           Text.Megaparsec (Parsec, many, parse, parseErrorPretty, (<|>)) 
+import           Text.Megaparsec (Parsec, many, parse, parseErrorPretty) 
 import qualified Text.Megaparsec.Char.Lexer  as L (decimal)
 import           Data.Void
 

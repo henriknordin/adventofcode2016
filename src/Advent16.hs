@@ -29,11 +29,9 @@ extend xs = 0 : (map (\x -> if x == 1 then 0 else 1) . reverse) xs
 parseInput :: String -> [Int]
 parseInput = map digitToInt . head . lines
 
-pretty :: [Int] -> String
-pretty = map intToDigit
-
 advent16 :: IO ()
 advent16 = do
   input <- parseInput <$> getInput 16
   putStrLn $ "Advent 16-1: " ++ show (answer input 272)      -- 10010110010011110
   putStrLn $ "Advent 16-2: " ++ show (answer input 35651584) -- 01101011101100011
+

@@ -1,9 +1,6 @@
 module Main where
 
-import System.IO (readFile)
 import System.Environment (getArgs)
-
-import Lib (getInput)
 
 import           Advent01 (advent01)
 import           Advent02 (advent02)
