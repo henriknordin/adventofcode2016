@@ -5,8 +5,8 @@ import           Data.Maybe (fromJust, catMaybes)
 import           Data.Ord (comparing)
 import           Data.List (maximumBy)
 
-import           Data.Hash (md5hash)
-import           Lib (getInput)
+import           Advent.Hash (md5hash)
+import           Advent.Lib (getInput)
 
 newtype Coordinate = Coordinate (Int, Int)
 

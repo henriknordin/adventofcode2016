@@ -8,7 +8,7 @@ import qualified Data.Set as S (Set, singleton, notMember, insert, size)
 import           Numeric (showIntAtBase)
 import           Data.Char (intToDigit)
 
-import           Lib (getInput)
+import           Advent.Lib (getInput)
 
 -- TODO Try with this as hashable instead
 data Coordinate

@@ -7,7 +7,7 @@ module Advent03
 import Data.List (transpose)
 import Data.List.Split (chunksOf)
 
-import Lib (getInput)
+import Advent.Lib (getInput)
 
 advent03 :: IO ()
 advent03 = do

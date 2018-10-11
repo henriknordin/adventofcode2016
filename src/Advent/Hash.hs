@@ -1,4 +1,4 @@
-module Data.Hash
+module Advent.Hash
   ( md5hash
   , md5hash'
   ) where

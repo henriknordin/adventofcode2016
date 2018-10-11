@@ -7,7 +7,7 @@ import           Text.Megaparsec (Parsec, many, parse, parseErrorPretty)
 import qualified Text.Megaparsec.Char.Lexer  as L (decimal)
 import           Data.Void
 
-import           Lib (getInput)
+import           Advent.Lib (getInput)
 
 data Disc =
   Disc { discId   :: !Int

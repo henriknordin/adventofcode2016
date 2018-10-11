@@ -8,7 +8,7 @@ import Data.Char (isAlpha, isDigit)
 import Data.List (group, sort, sortBy)
 import Data.Ord (comparing, Down(Down))
 
-import Lib (getInput)
+import Advent.Lib (getInput)
 
 advent04 :: IO ()
 advent04 = do

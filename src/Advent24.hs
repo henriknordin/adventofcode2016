@@ -9,7 +9,7 @@ import           Data.Maybe (fromJust, isJust)
 import qualified Data.PQueue.Prio.Min as PQ (MinPQueue, deleteFindMin, empty, insert, singleton)
 import qualified Data.Set as S (Set, singleton, notMember, insert)
 
-import           Lib (getInput)
+import           Advent.Lib (getInput)
 
 
 type Grid = Array (Int, Int) Char

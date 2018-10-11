@@ -5,12 +5,13 @@ module Advent10
     ( advent10
     ) where
 
-import           Text.Megaparsec (Parsec, some, parse, parseErrorPretty, (<|>)) 
+import           Text.Megaparsec (some, (<|>)) 
 import qualified Text.Megaparsec.Char.Lexer  as L (decimal)
-import           Data.Void
 import           Data.List (find)
 import qualified Data.Map as M
-import           Lib (getInput)
+
+import           Advent.Megaparsec (Parser, getParsed)
+import           Advent.Lib (getInput)
 
 advent10 :: IO ()
 advent10 = do
@@ -46,13 +47,6 @@ parseAction = do
 
 parseDest :: Parser (Either BotId Int)
 parseDest = (Left . BotId <$> ("bot " *> L.decimal)) <|> (Right <$> ("output " *> L.decimal))
-
-type Parser = Parsec Void String
-
-getParsed :: Parser a -> String -> IO a
-getParsed p s = case parse p "dummy.txt" s of
-            Left err -> fail (parseErrorPretty err)
-            Right a  -> return a
 
 isAction :: Instruction -> Bool
 isAction Action{} = True

@@ -7,7 +7,7 @@ module Advent01
 import Data.List (elemIndex)
 import Data.List.Split (splitOn)
 
-import Lib (getInput)
+import Advent.Lib (getInput)
 
 data Direction = North | East | South | West deriving (Eq, Enum, Show)
 

@@ -1,4 +1,4 @@
-module Lib
+module Advent.Lib
     ( getInput
     , combinations
     ) where
@@ -16,3 +16,4 @@ combinations n lst = do
   (x:xs) <- tails lst
   rest   <- combinations (n - 1) xs
   return $ x : rest
+

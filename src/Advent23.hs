@@ -5,14 +5,14 @@ module Advent23 where
 
 import           Data.Char (ord)
 
-import           Data.Void
-import           Text.Megaparsec (Parsec, parse, someTill, eof, parseErrorPretty, (<|>)) 
+import           Text.Megaparsec (someTill, eof, (<|>)) 
 import           Text.Megaparsec.Char (eol, printChar, space1)
 import qualified Text.Megaparsec.Char.Lexer as L (space, signed, decimal, skipLineComment, skipBlockComment)
 
 import qualified Data.Sequence as S (Seq, fromList, index, update)
 
-import           Lib (getInput)
+import           Advent.Megaparsec (Parser, getParsed)
+import           Advent.Lib (getInput)
 
 import Control.DeepSeq
 
@@ -35,13 +35,6 @@ data Program =
   Program { opcodes :: S.Seq Opcode 
           , pointer :: !Int
           } deriving (Show)
-
-type Parser = Parsec Void String
-
-getParsed :: Parser a -> String -> IO a
-getParsed p s = case parse p "dummy.txt" s of
-            Left err -> fail (parseErrorPretty err)
-            Right a  -> return a
 
 parseInput :: Parser [Opcode]
 parseInput = do

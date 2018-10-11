@@ -4,7 +4,7 @@ module Advent19 (advent19) where
 import           Data.Sequence
 import           Prelude hiding (length)
 
-import           Lib (getInput)
+import           Advent.Lib (getInput)
 
 answer1 :: Seq Int -> Int
 answer1 (x :<| Empty)    = x

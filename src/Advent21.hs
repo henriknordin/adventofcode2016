@@ -14,7 +14,7 @@ import qualified Text.Megaparsec.Char.Lexer as L (decimal, charLiteral)
 
 import           Prelude hiding (length, reverse, splitAt)
 
-import           Lib (getInput)
+import           Advent.Lib (getInput)
 
 data Opcode =
     SwapPos !Int !Int

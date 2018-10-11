@@ -4,8 +4,9 @@ module Advent14 (advent14) where
 import           Data.List (find, isInfixOf)
 import           Data.Maybe (isJust)
 
-import           Data.Hash (md5hash)
-import           Lib (getInput)
+import           Advent.Hash (md5hash)
+import           Advent.Lib (getInput)
+
 
 answer :: [String]-> Int
 answer s = go 0 s !! 63

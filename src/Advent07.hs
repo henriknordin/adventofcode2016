@@ -6,7 +6,8 @@ module Advent07
 
 import           Data.List (elemIndex, span)
 import           Data.Maybe (fromJust)
-import           Lib (getInput)
+
+import           Advent.Lib (getInput)
 
 advent07 :: IO ()
 advent07 = do

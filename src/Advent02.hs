@@ -4,7 +4,7 @@ module Advent02
     ( advent02
     ) where
 
-import Lib (getInput)
+import Advent.Lib (getInput)
 
 type Coordinate = (Int, Int)
 

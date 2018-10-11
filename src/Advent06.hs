@@ -6,7 +6,9 @@ module Advent06
 
 import           Data.List (group, sort, minimumBy, maximumBy, transpose)
 import           Data.Ord (comparing)
-import           Lib (getInput)
+
+import           Advent.Lib (getInput)
+
 
 advent06 :: IO ()
 advent06 = do

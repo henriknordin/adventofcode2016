@@ -3,7 +3,7 @@ module Advent16 (advent16) where
 
 import           Data.Char (digitToInt, intToDigit)
 
-import           Lib (getInput)
+import           Advent.Lib (getInput)
 
 answer :: [Int] -> Int -> String
 answer xs i = (map intToDigit . checksum . take i) $ xs ++ generate xs

@@ -1,7 +1,7 @@
 --- Day 18: Like a Rogue ---
 module Advent18 (advent18) where
 
-import           Lib (getInput)
+import           Advent.Lib (getInput)
 
 generate :: String -> [String]
 generate seed = seed : generate (next seed)

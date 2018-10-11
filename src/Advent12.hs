@@ -8,7 +8,7 @@ import           Data.Char (ord)
 import           Text.Read (readMaybe)
 import qualified Data.Sequence as S (Seq, fromList, index, update)
 
-import           Lib (getInput)
+import           Advent.Lib (getInput)
 
 
 newtype Register = 

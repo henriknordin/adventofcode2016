@@ -8,12 +8,12 @@ module Advent08
 import           Data.Array (Array, array, bounds, (//), (!))
 --import           Data.List.Split (chunksOf)
 import           Data.Foldable (toList)
-import           Lib (getInput)
 
-import           Text.Megaparsec (Parsec, many, parse, parseErrorPretty, (<|>)) 
+import           Text.Megaparsec (many, (<|>)) 
 import qualified Text.Megaparsec.Char.Lexer  as L (decimal)
-import           Data.Void
 
+import           Advent.Megaparsec (Parser, getParsed)
+import           Advent.Lib (getInput)
 
 advent08 :: IO ()
 advent08 = do
@@ -29,13 +29,6 @@ data Rule = Rect Int Int
           | RotateRow Int Int
           | RotateCol Int Int
           deriving (Show)
-
-type Parser = Parsec Void String
-
-getParsed :: Parser a -> String -> IO a
-getParsed p s = case parse p "dummy.txt" s of
-            Left err -> fail (parseErrorPretty err)
-            Right a  -> return a
 
 parseInput :: Parser [Rule]
 parseInput = do

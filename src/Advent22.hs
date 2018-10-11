@@ -2,8 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Advent22 where
 
-import           Data.Void
-import           Text.Megaparsec (Parsec, parse, someTill, eof, skipManyTill, parseErrorPretty) 
+import           Text.Megaparsec (someTill, eof, skipManyTill)
 import           Text.Megaparsec.Char (space, eol, printChar)
 import qualified Text.Megaparsec.Char.Lexer as L (decimal)
 
@@ -14,7 +13,8 @@ import qualified Data.Map.Strict as Map (Map, insert, member, fromList, keys, (!
 import qualified Data.PQueue.Prio.Min as PQ (MinPQueue, deleteFindMin, empty, insert, singleton)
 import qualified Data.Set as S (Set, singleton, notMember, insert)
 
-import           Lib (getInput)
+import           Advent.Megaparsec (Parser, getParsed)
+import           Advent.Lib (getInput)
 
 
 data Coordinate =
@@ -38,13 +38,6 @@ data Walk =
        , hole  :: Maybe Node
        , grid  :: Grid
        } deriving (Show, Eq)
-
-type Parser = Parsec Void String
-
-getParsed :: Parser a -> String -> IO a
-getParsed p s = case parse p "dummy.txt" s of
-            Left err -> fail (parseErrorPretty err)
-            Right a  -> return a
 
 parseInput :: Parser [Node]
 parseInput = do

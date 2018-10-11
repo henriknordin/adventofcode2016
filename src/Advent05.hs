@@ -13,7 +13,7 @@ import           Data.Digest.Pure.MD5
 import           Data.List (sortBy, nubBy)
 import           Data.Ord (comparing)
 
-import           Lib (getInput)
+import           Advent.Lib (getInput)
 
 advent05 :: IO ()
 advent05 = do

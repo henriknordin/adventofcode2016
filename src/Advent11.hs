@@ -6,7 +6,7 @@ import           Data.Ord (comparing)
 import qualified Data.PQueue.Min as Q (MinQueue, empty, singleton, deleteFindMin, insert)
 import qualified Data.Set as S (Set, singleton, notMember, insert)
 
-import           Lib (combinations)
+import           Advent.Lib (combinations)
 
 advent11 :: IO ()
 advent11 = do
