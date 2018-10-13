@@ -11,8 +11,7 @@ import qualified Text.Megaparsec.Char.Lexer as L (space, signed, decimal, skipLi
 import qualified Data.Sequence as S (Seq, fromList, index, update)
 import           Control.DeepSeq
 
-import           Advent.Megaparsec (Parser, getParsed)
-import           Advent.Lib (getInput)
+import           Advent.Lib (Parser, parseWith)
 
 newtype Pointer = 
   Pointer Int deriving (Show)
@@ -35,13 +34,13 @@ data Program =
           , pointer :: !Int
           } deriving (Show)
 
-parseInput :: Parser [Opcode]
-parseInput = do
-  opcodes <- someTill parseOpcode eof
+opcodesParser :: Parser [Opcode]
+opcodesParser = do
+  opcodes <- someTill opcodeParser eof
   pure opcodes
 
-parseOpcode :: Parser Opcode
-parseOpcode = parseCpy <|> parseInc <|> parseDec <|> parseJnz <|> parseTgl <|> parseOut
+opcodeParser :: Parser Opcode
+opcodeParser = parseCpy <|> parseInc <|> parseDec <|> parseJnz <|> parseTgl <|> parseOut
   where
     parseCpy = do
       v1 <- "cpy " *> parseEither
@@ -92,7 +91,7 @@ step :: Int -> Program -> Program
 step x (Program ops p) = Program ops (p + x)
 
 processOp :: Program -> S.Seq Int -> Opcode -> (Program, S.Seq Int)
-processOp program reg op = go op
+processOp program reg = go
   where
     go :: Opcode -> (Program, S.Seq Int)
     go (Inc x)                   = (step 1 program, S.update (unpack x) (get x reg + 1) reg)
@@ -104,7 +103,6 @@ processOp program reg op = go op
     go (Jnz (Right x) (Left y))  = if get x reg /= 0 then (step y program, reg) else (step 1 program, reg)
     go (Jnz (Right x) (Right y)) = if get x reg /= 0 then (step (get y reg) program, reg) else (step 1 program, reg)
     go Noop                      = (step 1 program, reg)
---    go (Tgl _)                   = (toogle op reg program, reg)
 
 get :: Pointer -> S.Seq Int -> Int
 get (Pointer x) reg = S.index reg x
@@ -123,7 +121,6 @@ answer1 ops = go 0
 
 advent25 :: IO ()
 advent25 = do
-  input <- getInput 25
-  opcodes <- getParsed parseInput input
+  opcodes <- parseWith opcodesParser 25
   putStrLn $ "Advent 25-1: " ++ show (answer1 opcodes)  -- 189
 

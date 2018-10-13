@@ -5,20 +5,12 @@ module Advent10
     ( advent10
     ) where
 
-import           Text.Megaparsec (some, (<|>)) 
+import           Text.Megaparsec (someTill, eof, (<|>)) 
 import qualified Text.Megaparsec.Char.Lexer  as L (decimal)
 import           Data.List (find)
 import qualified Data.Map as M
 
-import           Advent.Megaparsec (Parser, getParsed)
-import           Advent.Lib (getInput)
-
-advent10 :: IO ()
-advent10 = do
-  input <- getInput 10
-  instr <- getParsed parseInput input
-  putStrLn $ "Advent 10-1: " ++ show (answer1 instr (61, 17)) -- 161
-  putStrLn $ "Advent 10-2: " ++ show (answer2 instr)  -- 133163
+import           Advent.Lib (Parser, parseWith)
 
 newtype BotId = BotId Int deriving (Eq, Ord, Show)
 
@@ -29,8 +21,8 @@ data Instruction
  
 data Bot = Bot BotId [Int] deriving (Show)
 
-parseInput :: Parser [Instruction]
-parseInput = some (parseAssign <|> parseAction)
+parser :: Parser [Instruction]
+parser = someTill (parseAssign <|> parseAction) eof
 
 parseAssign :: Parser Instruction
 parseAssign = do
@@ -148,4 +140,10 @@ mkBot m (Assign k x) =
     Just (Bot _ xs) -> M.insert k (Bot k (x:xs)) m
     Nothing         -> M.insert k (Bot k [x]) m
 mkBot m _              = m
+
+advent10 :: IO ()
+advent10 = do
+  instr <- parseWith parser 10
+  putStrLn $ "Advent 10-1: " ++ show (answer1 instr (61, 17)) -- 161
+  putStrLn $ "Advent 10-2: " ++ show (answer2 instr)  -- 133163
 

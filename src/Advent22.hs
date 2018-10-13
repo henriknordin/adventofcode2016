@@ -13,8 +13,7 @@ import qualified Data.Map.Strict as Map (Map, insert, member, fromList, keys, (!
 import qualified Data.PQueue.Prio.Min as PQ (MinPQueue, deleteFindMin, empty, insert, singleton)
 import qualified Data.Set as S (Set, singleton, notMember, insert)
 
-import           Advent.Megaparsec (Parser, getParsed)
-import           Advent.Lib (getInput)
+import           Advent.Lib (Parser, parseWith)
 
 
 data Coordinate =
@@ -39,15 +38,15 @@ data Walk =
        , grid  :: Grid
        } deriving (Show, Eq)
 
-parseInput :: Parser [Node]
-parseInput = do
+nodesParser :: Parser [Node]
+nodesParser = do
   "root@ebhq-gridcenter# df -h" *> eol
   "Filesystem" *> space *> "Size  Used  Avail  Use%" *> eol
-  nodes <- someTill parseNode eof
+  nodes <- someTill nodeParser eof
   pure nodes
 
-parseNode :: Parser Node
-parseNode = do
+nodeParser :: Parser Node
+nodeParser = do
   --"/dev/grid/node-x1-y7     85T   69T    16T   81%"
   x <- "/dev/grid/node-x" *> L.decimal
   y <- "-y" *> L.decimal 
@@ -163,8 +162,7 @@ aStar w0 p cost gen = go (PQ.singleton (cost w0) w0) (S.singleton $ coordinate $
 
 advent22 :: IO ()
 advent22 = do
-  input <- getInput 22
-  nodes <- getParsed parseInput input
+  nodes <- parseWith nodesParser 22
   putStrLn $ "Advent 22-1: " ++ show (answer1 nodes)                  -- 952
   putStrLn $ "Advent 22-2: " ++ show (answer2 (Coordinate 0 0) nodes) -- 181
 

@@ -6,22 +6,14 @@ module Advent08
     ) where
 
 import           Data.Array (Array, array, bounds, (//), (!))
---import           Data.List.Split (chunksOf)
 import           Data.Foldable (toList)
 
-import           Text.Megaparsec (many, (<|>)) 
+import           Text.Megaparsec (eof, someTill, (<|>)) 
+import           Text.Megaparsec.Char (eol)
 import qualified Text.Megaparsec.Char.Lexer  as L (decimal)
 
-import           Advent.Megaparsec (Parser, getParsed)
-import           Advent.Lib (getInput)
+import           Advent.Lib (Parser, parseWith)
 
-advent08 :: IO ()
-advent08 = do
-  input <- getInput 8
-  rules <- getParsed parseInput input
-  putStrLn $ "Advent 8-1: " ++ show (answer1 rules)  -- 121
-  putStrLn   "Advent 8-2: read the below text as 6x5 bitmaps" 
-  putStr $ answer2 rules -- RURUCEOEIL
 
 type Grid = Array (Int, Int) Int
 
@@ -30,40 +22,23 @@ data Rule = Rect Int Int
           | RotateCol Int Int
           deriving (Show)
 
-parseInput :: Parser [Rule]
-parseInput = do
-  rules <- many parseRule
+ruleParser :: Parser [Rule]
+ruleParser = do
+  rules <- someTill (parseRect <|> parseRotRow <|> parseRotCol) eof
   pure rules
-
-parseRule :: Parser Rule
-parseRule = parseRect <|> parseRotRow <|> parseRotCol
-
-parseRect :: Parser Rule
-parseRect = do
-  r <- "rect " *> L.decimal
-  c <- "x" *> L.decimal <* "\n"
-  pure (Rect r c)
-
-parseRotRow :: Parser Rule
-parseRotRow = do
-  y <- "rotate row y=" *> L.decimal
-  s <- " by " *> L.decimal <* "\n"
-  pure (RotateRow y s)
-
-parseRotCol:: Parser Rule
-parseRotCol = do
-  x <- "rotate column x=" *> L.decimal
-  s <- " by " *> L.decimal <* "\n"
-  pure (RotateCol x s)
-
-answer1 :: [Rule] -> Int
-answer1 = length
-        . filter (== 1) 
-        . toList 
-        . foldl process (mkGrid 50 6)
-
-answer2 :: [Rule] -> String
-answer2 = pretty' . foldl process (mkGrid 50 6)
+  where
+    parseRect = do
+      r <- "rect " *> L.decimal
+      c <- "x" *> L.decimal <* eol
+      pure (Rect r c)
+    parseRotRow = do
+      y <- "rotate row y=" *> L.decimal
+      s <- " by " *> L.decimal <* eol
+      pure (RotateRow y s)
+    parseRotCol = do
+      x <- "rotate column x=" *> L.decimal
+      s <- " by " *> L.decimal <* eol
+      pure (RotateCol x s)
 
 process :: Grid -> Rule -> Grid
 process g (Rect a b) = rect g a b
@@ -92,17 +67,24 @@ rotateRow g r shift = g // [(((c + shift) `mod` (cols + 1), r), g!(c,r))| c <- [
   where
     ((_,_), (cols,_)) = bounds g
 
---pretty :: Grid -> IO ()
---pretty g = putStr . unlines . chunksOf xBound . map (\c -> if c == 0 then '.' else '#') . toList $ g
---  where
---    xBound = fst . snd . bounds $ g
---
-pretty' :: Grid -> String
-pretty' g = unlines $ map (unwords . map (show . (g !))) indices
+pretty :: Grid -> String
+pretty g = unlines $ map (unwords . map (show . (g !))) indices
   where indices = [[(x, y) | x <- [startX..endX]] | y <- [startY..endY]]
         ((startX, startY), (endX, endY)) = bounds g
---
---pretty'' :: Grid -> String
---pretty'' g = unlines $ map (show . (g !)) indices
---  where indices = range $ bounds g
+
+answer1 :: [Rule] -> Int
+answer1 = length
+        . filter (== 1) 
+        . toList 
+        . foldl process (mkGrid 50 6)
+
+answer2 :: [Rule] -> String
+answer2 = pretty . foldl process (mkGrid 50 6)
+
+advent08 :: IO ()
+advent08 = do
+  rules <- parseWith ruleParser 8
+  putStrLn $ "Advent 8-1: " ++ show (answer1 rules)  -- 121
+  putStrLn   "Advent 8-2: read the below text as 6x5 bitmaps" 
+  putStr $ answer2 rules -- RURUCEOEIL
 

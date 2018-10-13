@@ -5,6 +5,7 @@ module Advent09
     ) where
 
 import           Data.List.Split (splitOn)
+
 import           Advent.Lib (getInput)
 
 advent09 :: IO ()

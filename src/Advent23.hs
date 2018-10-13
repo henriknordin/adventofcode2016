@@ -11,8 +11,7 @@ import qualified Text.Megaparsec.Char.Lexer as L (space, signed, decimal, skipLi
 
 import qualified Data.Sequence as S (Seq, fromList, index, update)
 
-import           Advent.Megaparsec (Parser, getParsed)
-import           Advent.Lib (getInput)
+import           Advent.Lib (Parser, parseWith)
 
 import Control.DeepSeq
 
@@ -36,13 +35,13 @@ data Program =
           , pointer :: !Int
           } deriving (Show)
 
-parseInput :: Parser [Opcode]
-parseInput = do
-  opcodes <- someTill parseOpcode eof
+opcodesParser :: Parser [Opcode]
+opcodesParser = do
+  opcodes <- someTill opcodeParser eof
   pure opcodes
 
-parseOpcode :: Parser Opcode
-parseOpcode = parseCpy <|> parseInc <|> parseDec <|> parseJnz <|> parseTgl
+opcodeParser :: Parser Opcode
+opcodeParser = parseCpy <|> parseInc <|> parseDec <|> parseJnz <|> parseTgl
   where
     parseCpy = do
       v1 <- "cpy " *> parseEither
@@ -125,8 +124,7 @@ answer1 opcodes x = let register = process (S.fromList [x, 0, 0, 0]) opcodes
 
 advent23 :: IO ()
 advent23 = do
-  input <- getInput 23
-  opcodes <- getParsed parseInput input
+  opcodes <- parseWith opcodesParser 25
   putStrLn $ "Advent 23-1: " ++ show (answer1 opcodes 7)  -- 14065
   putStrLn $ "Advent 23-2: " ++ show (answer1 opcodes 12) -- 479010625
 

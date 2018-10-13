@@ -1,14 +1,31 @@
 module Advent.Lib
     ( getInput
+    , Parser
+    , parseWith
     , combinations
     ) where
 
-import System.IO (readFile)
-import Text.Printf (printf)
-import Data.List (tails)
+import           Data.List (tails)
+import           Data.Void
+import           Text.Megaparsec (Parsec, parseErrorPretty, runParser)
+import           Text.Printf (printf)
+import           System.IO (readFile)
+
 
 getInput :: Int -> IO String
 getInput i = readFile (printf "data/input%02d.txt" i)
+
+type Parser = Parsec Void String
+
+-- | Parse some file. Will print a pretty error message if it fails
+parseWith :: Parser a -- ^ The input data parser
+          -> Int      -- ^ The number of the day that should be parsed
+          -> IO a     -- ^ The parsed result
+parseWith p day = runParser p filepath <$> input >>= either report return
+  where
+    filepath = printf "data/input%02d.txt" day
+    input = readFile filepath
+    report e = fail (parseErrorPretty e)
 
 combinations :: Integer -> [a] -> [[a]]
 combinations 0 lst = [[]]
