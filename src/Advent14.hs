@@ -4,7 +4,7 @@ module Advent14 (advent14) where
 import           Data.List (find, isInfixOf)
 import           Data.Maybe (isJust)
 
-import           Advent.Hash (md5hash)
+import           Advent.Hash (toMD5)
 import           Advent.Lib (getInput)
 
 
@@ -31,10 +31,10 @@ checkKey :: Char -> String -> Bool
 checkKey c s = replicate 5 c `isInfixOf` s
 
 hashes :: String -> [String]
-hashes salt = map (\a -> md5hash $ salt ++ show a)  [0..]
+hashes salt = map (\a -> toMD5 $ salt ++ show a)  [0..]
 
 strechedHashes :: String -> [String]
-strechedHashes salt = map (\a -> iterate md5hash (salt ++ show a) !! 2017)  [0..]
+strechedHashes salt = map (\a -> iterate toMD5 (salt ++ show a) !! 2017)  [0..]
 
 parseInput :: String -> String
 parseInput = head . words . head . lines

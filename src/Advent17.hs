@@ -5,7 +5,7 @@ import           Data.Maybe (fromJust, catMaybes)
 import           Data.Ord (comparing)
 import           Data.List (maximumBy)
 
-import           Advent.Hash (md5hash)
+import           Advent.Hash (toMD5)
 import           Advent.Lib (getInput)
 
 newtype Coordinate = Coordinate (Int, Int)
@@ -48,7 +48,7 @@ next (Walk (Coordinate (x, y)) path) = filter inside $ catMaybes
   , if isOpen r then Just (Walk (Coordinate (x + 1, y)) (path ++ "R")) else Nothing
   ]
   where
-    (u:d:l:r:_) = take 4 $ md5hash path
+    (u:d:l:r:_) = take 4 $ toMD5 path
 
 inside :: Walk -> Bool
 inside (Walk (Coordinate (x, y)) _) = x >= 1 && x <= 4 && y >= 1 && y <= 4
@@ -74,4 +74,3 @@ advent17 = do
   input <- parseInput <$> getInput 17
   putStrLn $ "Advent 17-1: " ++ show (answer1 input) -- RRRLDRDUDD
   putStrLn $ "Advent 17-2: " ++ show (answer2 input) -- 706
-

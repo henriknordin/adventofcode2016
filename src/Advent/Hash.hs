@@ -1,23 +1,15 @@
 module Advent.Hash
-  ( md5hash
-  , md5hash'
+  ( toMD5
   ) where
-
---import qualified Data.ByteString as B
-import qualified Data.ByteString.Lazy as BL (fromStrict)
-import qualified Data.ByteString.Char8 as C
-import           Data.Digest.Pure.MD5 (md5)
 
 import           Crypto.Hash
 
-md5hash :: String ->  String
-md5hash s = show hashed
-  where
-    unhashed = C.pack s
-    hashed = md5 $ BL.fromStrict unhashed
+import qualified Data.ByteString as B (ByteString)
+import           Data.String (fromString)
 
--- Advent 14-1: 29374
--- Advent 14-1: 38881
--- stack exec adventofcode2016-exe 14  1451.88s user 1652.42s system 503% cpu 10:16.54 total
-md5hash' :: String -> String
-md5hash' s = show (hashWith MD5 $ C.pack s)
+toMD5 :: String -> String
+toMD5 = show . md5 . fromString
+  where
+    md5 :: B.ByteString -> Digest MD5
+    md5 = hash
+
