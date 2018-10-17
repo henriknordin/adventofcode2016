@@ -1,6 +1,9 @@
 module Main where
 
-import System.Environment (getArgs)
+import           Options.Applicative
+import qualified Data.IntMap.Strict as IntMap (IntMap, fromList, lookup)
+import           Data.Maybe (fromMaybe)
+import           Data.Semigroup ((<>))
 
 import           Advent01 (advent01)
 import           Advent02 (advent02)
@@ -28,58 +31,59 @@ import           Advent23 (advent23)
 import           Advent24 (advent24)
 import           Advent25 (advent25)
 
-parse :: [String] -> IO ()
-parse ["01"] = advent01
-parse ["02"] = advent02
-parse ["03"] = advent03
-parse ["04"] = advent04
-parse ["05"] = advent05
-parse ["06"] = advent06
-parse ["07"] = advent07
-parse ["08"] = advent08
-parse ["09"] = advent09
-parse ["10"] = advent10
-parse ["11"] = advent11
-parse ["12"] = advent12
-parse ["13"] = advent13
-parse ["14"] = advent14
-parse ["15"] = advent15
-parse ["16"] = advent16
-parse ["17"] = advent17
-parse ["18"] = advent18
-parse ["19"] = advent19
-parse ["20"] = advent20
-parse ["21"] = advent21
-parse ["22"] = advent22
-parse ["23"] = advent23
-parse ["24"] = advent24
-parse ["25"] = advent25
-parse _      = advent01
-            >> advent02
-            >> advent03
-            >> advent04
-            >> advent05
-            >> advent06
-            >> advent07
-            >> advent08
-            >> advent09
-            >> advent10
-            >> advent11
-            >> advent12
-            >> advent13
-            >> advent14
-            >> advent15
-            >> advent16
-            >> advent17
-            >> advent18
-            >> advent19
-            >> advent20
-            >> advent21
-            >> advent22
-            >> advent23
-            >> advent24
-            >> advent25
+
+days :: IntMap.IntMap (IO ())
+days = IntMap.fromList
+  [ ( 1, advent01)
+  , ( 2, advent02)
+  , ( 3, advent03)
+  , ( 4, advent04)
+  , ( 5, advent05)
+  , ( 6, advent06)
+  , ( 7, advent07)
+  , ( 8, advent08)
+  , ( 9, advent09)
+  , (10, advent10)
+  , (11, advent11)
+  , (12, advent12)
+  , (13, advent13)
+  , (14, advent14)
+  , (15, advent15)
+  , (16, advent16)
+  , (17, advent17)
+  , (18, advent18)
+  , (19, advent19)
+  , (20, advent20)
+  , (21, advent21)
+  , (22, advent22)
+  , (23, advent23)
+  , (24, advent24)
+  , (25, advent25)
+  ]
+
+data Options = RunDay Int
+             | RunAll
+
+runWithOptions :: Options -> IO ()
+runWithOptions (RunDay day) =
+  fromMaybe (putStrLn $ "No solution availabe for advent " ++ show day)
+            (IntMap.lookup day days)
+runWithOptions RunAll       = sequence_ days
+
+parserPrefs :: ParserPrefs
+parserPrefs = defaultPrefs { prefShowHelpOnError = True }
 
 main :: IO ()
-main = getArgs >>= parse
+main = runWithOptions =<< customExecParser parserPrefs opts
+  where
+    parser :: Parser Options
+    parser = pure RunAll
+         <|> RunDay <$> option auto (long "day" <>
+                                     short 'd' <>
+                                     help "Which day should we run" <>
+                                     metavar "INT")
 
+    opts = info (parser <**> helper)
+      (  fullDesc
+      <> progDesc "If no arguments available, the solutions for all days will be calculated"
+      <> header "Solutions for Advent of Code 2016")
