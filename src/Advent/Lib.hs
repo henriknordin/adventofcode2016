@@ -3,6 +3,7 @@ module Advent.Lib
     , Parser
     , parseWith
     , combinations
+    , applyN
     ) where
 
 import           Data.List (tails)
@@ -34,3 +35,6 @@ combinations n lst = do
   rest   <- combinations (n - 1) xs
   return $ x : rest
 
+-- | Apply a function f n times to a value
+applyN :: Int -> (a -> a) -> a -> a
+applyN n f = foldr (.) id (replicate n f)
