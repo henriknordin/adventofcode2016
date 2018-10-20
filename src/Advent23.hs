@@ -124,7 +124,7 @@ answer1 opcodes x = let register = process (S.fromList [x, 0, 0, 0]) opcodes
 
 advent23 :: IO ()
 advent23 = do
-  opcodes <- parseWith opcodesParser 25
+  opcodes <- parseWith opcodesParser 23
   putStrLn $ "Advent 23-1: " ++ show (answer1 opcodes 7)  -- 14065
   putStrLn $ "Advent 23-2: " ++ show (answer1 opcodes 12) -- 479010625
 
