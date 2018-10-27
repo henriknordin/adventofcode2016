@@ -1,23 +1,11 @@
 module Advent11 where
 
-import           Data.List (foldl', sort, groupBy, (\\)) 
+import           Data.List (sort, groupBy, (\\)) 
 import           Data.Maybe (fromJust, mapMaybe)
 import           Data.Ord (comparing)
-import qualified Data.PQueue.Min as Q (MinQueue, empty, singleton, deleteFindMin, insert)
-import qualified Data.Set as S (Set, singleton, notMember, insert)
 
 import           Advent.Lib (combinations)
-
-advent11 :: IO ()
-advent11 = do
-  putStrLn $ "Advent 11-1: " ++ show (answer input1) -- 33
-  putStrLn $ "Advent 11-2: " ++ show (answer input2) -- 57
-
-answer :: [Floor] -> Int
-answer xs = numberMoves $ fromJust result
-  where
-    items = (length . concat) xs
-    result = aStar (Building 0 xs 0) (`done` items)
+import           Advent.Search (aStar)
 
 data Item = Generator !String | Microchip !String
   deriving (Show, Eq)
@@ -40,16 +28,7 @@ type Floor = [Item]
 data Building = 
   Building { elevator    :: !Int
            , floors      :: ![Floor]
-           , numberMoves :: !Int
-           } deriving (Show, Eq)
-
-instance Ord Building where
-  compare = comparing costFunction
-
--- The theoretical minimum number of moves is 27 without any interaction
--- I believe that the correct answer should be 33
-costFunction :: Building -> Int
-costFunction (Building _ fs m) = m + cost fs
+           } deriving (Show, Eq, Ord)
 
 --  1 item(s)  takes 1 move
 --  2 item(s) takes 1 move
@@ -62,8 +41,8 @@ costFunction (Building _ fs m) = m + cost fs
 -- Should return the euclidian distance of moving all items to the top
 -- TODO This does not take elevator positioning into account, which in
 --      effect understates the number of moves
-cost :: [Floor] -> Int
-cost  = go 0
+heuristic :: Building -> Int
+heuristic b = go 0 (floors b)
   where
     go _ [_] = 0
     go found (x:xs) =
@@ -74,32 +53,6 @@ cost  = go 0
                         else 2 * (totalItems - 2) + 1
       in floorCost + go (found + items) xs
 
---bfs :: Building -> (Building -> Bool) -> Maybe Building
---bfs b p = go [b] (S.singleton (elevator b, floors b))
---  where
---    go :: [Building] -> S.Set (Int, [Floor]) -> Maybe Building
---    go [] _ = Nothing
---    go (x:xs) seen = 
---      let neighbours = next x
---          filtered = filter (\x -> S.notMember (elevator x, floors x) seen) neighbours
---          seen' = foldl' (\b a -> S.insert (elevator a, floors a) b) seen filtered
---      in if p x then Just x else go (xs ++ filtered) seen'
-
-aStar :: Building           -- ^ The starting point
-      -> (Building -> Bool) -- ^ The predicate
-      -> Maybe Building     -- ^ The Building matching the predicate
-aStar b p = go (Q.singleton b) (S.singleton (elevator b, floors b))
-  where
-    go :: Q.MinQueue Building -> S.Set (Int, [Floor]) -> Maybe Building
-    go queue visited
-      | queue == Q.empty = Nothing
-      | otherwise        = 
-          let (b, queue') = Q.deleteFindMin queue
-              neighbours = next b
-              filtered = filter (\x -> S.notMember (elevator x, floors x) visited) neighbours
-              visited' = foldl' (\b a -> S.insert (elevator a, floors a) b) visited filtered
-              queue'' = foldl' (\b a -> Q.insert a b) queue' filtered
-          in if p b then Just b else go queue'' visited' 
 
 isLegal :: Floor -> Bool
 isLegal xs = 
@@ -115,13 +68,6 @@ oddItems :: Floor -> Floor
 oddItems xs = concat $ filter (\a -> length a == 1) 
                      $ groupBy (\a b -> word a == word b) xs
 
---oddItems :: Floor -> Floor
---oddItems [] = []
---oddItems [x] = [x]
---oddItems (a:b:xs) = if letter a == letter b
---                      then oddItems xs
---                      else a:oddItems (b:xs)
-
 isMicrochip :: Item -> Bool
 isMicrochip (Microchip _) = True
 isMicrochip _             = False
@@ -135,9 +81,9 @@ next b = mapMaybe (nextBuilding b) moves
     moves = nextMoves b
 
 nextBuilding :: Building -> Move -> Maybe Building
-nextBuilding (Building e fs ms) m = 
+nextBuilding (Building e fs) m = 
   if isLegal (fs' !! e) && isLegal (fs' !! nextLvl)
-    then Just (Building nextLvl fs' (1 + ms))
+    then Just (Building nextLvl fs')
     else Nothing
   where
     nextLvl    = e + direction m
@@ -152,7 +98,7 @@ indices :: [Int]
 indices = [0..]
 
 nextMoves :: Building -> [Move]
-nextMoves (Building e floors _) = 
+nextMoves (Building e floors) = 
   [Move d i | i <- itemCombos
             , d <- [-1, 1]
             , e + d >= 0 && e + d <= 3
@@ -195,7 +141,18 @@ benchmark =
   ]
 
 done :: Building -> Int -> Bool
-done (Building _ fs m) total = length top == total
+done (Building _ fs) total = length top == total
   where 
     top = fs !! 3
+
+answer :: [Floor] -> Int
+answer xs = fst $ fromJust result
+  where
+    items = (length . concat) xs
+    result = aStar (Building 0 xs) heuristic next (`done` items)
+
+advent11 :: IO ()
+advent11 = do
+  putStrLn $ "Advent 11-1: " ++ show (answer input1) -- 33
+  putStrLn $ "Advent 11-2: " ++ show (answer input2) -- 57
 
