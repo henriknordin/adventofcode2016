@@ -74,7 +74,7 @@ parseInput :: String -> Int
 parseInput = read
 
 answer1 :: Int -> Int -> Int -> Int
-answer1 goalX goalY magic = fst $ fromJust $ aStar start heuristic generator predicate
+answer1 goalX goalY magic = fst $ fromJust $ aStar start heuristic generator predicate id
   where
     predicate (Coordinate x y) = x == goalX && y == goalY
 

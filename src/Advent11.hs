@@ -149,7 +149,7 @@ answer :: [Floor] -> Int
 answer xs = fst $ fromJust result
   where
     items = (length . concat) xs
-    result = aStar (Building 0 xs) heuristic next (`done` items)
+    result = aStar (Building 0 xs) heuristic next (`done` items) id
 
 advent11 :: IO ()
 advent11 = do
